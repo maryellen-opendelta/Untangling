@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untangling — A Six-Week Program for Women After Workplace Trauma</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1814;
+    --ink-soft: #4a4740;
+    --ink-muted: #8a8780;
+    --cream: #f5f2ec;
+    --cream-dark: #ede9e0;
+    --sage: #7a8c78;
+    --sage-light: #c8d4c6;
+    --sage-dark: #4a5c48;
+    --navy: #1a2744;
+    --navy-soft: #2d3f6e;
+    --navy-pale: #e8edf5;
+    --pink: #d4537e;
+    --pink-light: #f7dde8;
+    --pink-pale: #fdf0f5;
+    --coral: #d85a30;
+    --coral-light: #f5c4b0;
+    --coral-pale: #fdf0eb;
+    --chartreuse: #b8c832;
+    --chartreuse-light: #e8ef9a;
+    --chartreuse-pale: #f5f8d8;
+    --border: rgba(26,24,20,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 48px;
+    background: rgba(245,242,236,0.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; letter-spacing: 0.02em;
+    color: var(--ink); text-decoration: none;
+  }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-odg {
+    font-size: 12px; font-weight: 500; color: var(--navy);
+    text-decoration: none; letter-spacing: 0.04em;
+    border-bottom: 1.5px solid var(--navy-soft);
+    padding-bottom: 1px; transition: color 0.2s;
+  }
+  .nav-odg:hover { color: var(--pink); border-color: var(--pink); }
+  .nav-cta {
+    background: var(--navy); color: var(--cream);
+    font-size: 13px; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 10px 24px;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--pink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    padding: 80px 64px 80px 48px;
+    display: flex; flex-direction: column; justify-content: center;
+    border-right: 1px solid var(--border);
+  }
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--coral);
+    margin-bottom: 28px;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 6vw, 80px);
+    line-height: 1.05; font-weight: 400;
+    margin-bottom: 24px; letter-spacing: -0.01em;
+  }
+  .hero-title em { font-style: italic; color: var(--pink); }
+  .hero-sub {
+    font-size: 18px; line-height: 1.65; color: var(--ink-soft);
+    max-width: 440px; margin-bottom: 48px; font-weight: 300;
+  }
+  .hero-cta-group { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--navy); color: var(--cream);
+    font-size: 14px; font-weight: 500; letter-spacing: 0.04em;
+    padding: 16px 36px; text-decoration: none; display: inline-block;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--pink); }
+  .btn-ghost {
+    font-size: 14px; color: var(--ink-soft);
+    text-decoration: underline; text-underline-offset: 3px;
+    cursor: pointer; background: none; border: none; font-family: inherit;
+  }
+
+  .hero-right {
+    background: var(--navy);
+    padding: 80px 48px 80px 64px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .pull-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; line-height: 1.5; font-style: italic;
+    color: var(--cream); margin-bottom: 40px;
+    padding-left: 24px; border-left: 3px solid var(--chartreuse);
+  }
+  .hero-details { display: flex; flex-direction: column; gap: 0; }
+  .hero-detail-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero-detail-item:last-child { border-bottom: none; }
+  .detail-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(255,255,255,0.38);
+    min-width: 80px; padding-top: 2px;
+  }
+  .detail-value { font-size: 15px; color: rgba(255,255,255,0.85); font-weight: 300; }
+
+  /* COLOR BANNER */
+  .color-banner {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    height: 6px;
+  }
+  .cb1 { background: var(--navy); }
+  .cb2 { background: var(--pink); }
+  .cb3 { background: var(--coral); }
+  .cb4 { background: var(--chartreuse); }
+
+  /* FOR YOU */
+  .for-you { background: var(--ink); color: var(--cream); padding: 100px 48px; }
+  .for-you-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .for-you .section-label { color: var(--chartreuse); }
+  .for-you .section-title { color: var(--cream); }
+  .recognition-list { list-style: none; }
+  .recognition-list li {
+    font-size: 16px; color: rgba(245,242,236,0.82);
+    padding: 18px 0; border-bottom: 1px solid rgba(245,242,236,0.1);
+    display: flex; gap: 14px; align-items: flex-start; line-height: 1.55;
+  }
+  .recognition-list li::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--chartreuse); margin-top: 8px; flex-shrink: 0;
+  }
+  .not-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+  .not-list li {
+    font-size: 15px; color: rgba(245,242,236,0.6);
+    padding-left: 20px; position: relative; line-height: 1.5;
+  }
+  .not-list li::before { content: "×"; position: absolute; left: 0; color: var(--coral); font-weight: 500; }
+  .not-box {
+    background: rgba(245,242,236,0.05);
+    border: 1px solid rgba(245,242,236,0.1);
+    padding: 32px;
+  }
+  .not-box-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(245,242,236,0.35);
+    margin-bottom: 16px;
+  }
+  .readiness-quote {
+    margin-top: 32px; padding: 28px 32px;
+    background: rgba(212,83,126,0.15);
+    border-left: 3px solid var(--pink);
+  }
+  .readiness-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-style: italic;
+    color: rgba(245,242,236,0.88); line-height: 1.65;
+  }
+
+  /* SECTION BASICS */
+  .section { padding: 100px 48px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--coral); margin-bottom: 20px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.2; font-weight: 400; margin-bottom: 32px;
+  }
+
+  /* PROGRAM */
+  .program { padding: 100px 48px; background: var(--cream-dark); }
+  .program-inner { max-width: 1100px; margin: 0 auto; }
+  .phase-legend { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 8px; }
+  .pl-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; color: var(--ink-muted); }
+  .pl-dot { width: 9px; height: 9px; border-radius: 50%; }
+  .weeks-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1px; background: var(--border);
+    margin-top: 48px; border: 1px solid var(--border);
+  }
+  .week-tile { background: var(--cream); padding: 36px 32px; transition: background 0.2s; }
+  .week-tile:hover { background: #fff; }
+  .week-num {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-muted); margin-bottom: 12px;
+  }
+  .week-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 400; margin-bottom: 12px; line-height: 1.2;
+  }
+  .week-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+  .phase-bar { height: 3px; margin-bottom: 20px; width: 32px; }
+  .ph1 { background: var(--navy); }
+  .ph2 { background: var(--pink); }
+  .ph3 { background: var(--coral); }
+
+  /* ACCENT STRIP between program and facilitator */
+  .accent-strip {
+    background: var(--chartreuse);
+    padding: 36px 48px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .accent-strip p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-style: italic; color: var(--ink);
+    text-align: center; line-height: 1.5;
+    max-width: 720px;
+  }
+
+  /* FACILITATOR */
+  .facilitator { padding: 100px 48px; background: var(--cream); }
+  .facilitator-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .facilitator-text .section-title { margin-bottom: 20px; }
+  .facilitator-bio { font-size: 16px; color: var(--ink-soft); line-height: 1.8; margin-bottom: 20px; font-weight: 300; }
+  .cred-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+  .cred-list li { font-size: 14px; color: var(--ink-soft); padding-left: 18px; position: relative; }
+  .cred-list li::before { content: "—"; position: absolute; left: 0; color: var(--pink); }
+  .odg-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--navy-pale); color: var(--navy);
+    font-size: 13px; font-weight: 500; padding: 12px 20px;
+    text-decoration: none; border: 1px solid rgba(26,39,68,0.15);
+    transition: background 0.2s;
+  }
+  .odg-link:hover { background: var(--pink-pale); color: var(--pink); border-color: var(--pink-light); }
+  .facilitator-quote-block {
+    background: var(--navy); padding: 48px;
+    border-top: 4px solid var(--coral);
+  }
+  .fq-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-style: italic;
+    line-height: 1.6; color: rgba(245,242,236,0.92); margin-bottom: 24px;
+  }
+  .fq-name { font-size: 13px; font-weight: 500; color: var(--coral-light); }
+
+  /* PRICING */
+  .pricing { padding: 100px 48px; background: var(--pink-pale); }
+  .pricing-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+  .pricing .section-label { color: var(--pink); }
+  .pricing-inner .section-title { margin-bottom: 16px; }
+  .pricing-sub { font-size: 17px; color: var(--ink-soft); margin-bottom: 64px; font-weight: 300; }
+  .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
+  .price-card {
+    background: var(--cream); border: 1px solid rgba(212,83,126,0.2);
+    padding: 40px 36px; text-align: left; position: relative;
+  }
+  .price-card.featured { border-color: var(--pink); border-width: 2px; }
+  .price-tier {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--pink); margin-bottom: 12px;
+  }
+  .price-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px; font-weight: 400; line-height: 1;
+    margin-bottom: 16px; color: var(--navy);
+  }
+  .price-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 28px; }
+  .btn-navy-solid {
+    display: inline-block; background: var(--navy); color: var(--cream);
+    font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+    padding: 12px 24px; text-decoration: none; transition: background 0.2s;
+  }
+  .btn-navy-solid:hover { background: var(--pink); }
+  .price-note {
+    font-size: 14px; color: var(--ink-muted); text-align: center;
+    line-height: 1.6; max-width: 560px; margin: 0 auto;
+  }
+
+  /* REGISTRATION */
+  .registration { padding: 100px 48px; background: var(--navy); color: var(--cream); }
+  .registration-inner { max-width: 700px; margin: 0 auto; }
+  .registration .section-label { color: var(--chartreuse); }
+  .registration .section-title { color: var(--cream); margin-bottom: 16px; }
+  .reg-sub { font-size: 16px; color: rgba(245,242,236,0.65); margin-bottom: 56px; font-weight: 300; line-height: 1.7; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .form-group { margin-bottom: 28px; }
+  .form-label {
+    display: block; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(245,242,236,0.45); margin-bottom: 10px;
+  }
+  .form-input, .form-textarea, .form-select {
+    width: 100%; background: rgba(245,242,236,0.07);
+    border: 1px solid rgba(245,242,236,0.15); color: var(--cream);
+    font-family: 'DM Sans', sans-serif; font-size: 15px;
+    padding: 14px 18px; outline: none; transition: border-color 0.2s; appearance: none;
+  }
+  .form-input::placeholder, .form-textarea::placeholder { color: rgba(245,242,236,0.25); }
+  .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--chartreuse); }
+  .form-textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+  .form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(245,242,236,0.4)' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 16px center; cursor: pointer;
+  }
+  .form-select option { background: var(--navy); }
+  .pricing-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .price-option {
+    border: 1px solid rgba(245,242,236,0.15); padding: 20px;
+    cursor: pointer; transition: border-color 0.2s, background 0.2s; position: relative;
+  }
+  .price-option:hover { border-color: rgba(245,242,236,0.4); }
+  .price-option input[type="radio"] { position: absolute; opacity: 0; }
+  .price-option.selected { border-color: var(--chartreuse); background: rgba(184,200,50,0.08); }
+  .po-amount { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 400; color: var(--cream); margin-bottom: 4px; }
+  .po-label { font-size: 12px; color: rgba(245,242,236,0.45); }
+  .po-desc { font-size: 13px; color: rgba(245,242,236,0.55); margin-top: 8px; line-height: 1.5; }
+  .form-divider { border: none; border-top: 1px solid rgba(245,242,236,0.1); margin: 36px 0; }
+  .submit-btn {
+    width: 100%; background: var(--coral); color: var(--cream);
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase; padding: 18px;
+    border: none; cursor: pointer; transition: background 0.2s; margin-top: 8px;
+  }
+  .submit-btn:hover { background: var(--pink); }
+  .form-footer-note {
+    font-size: 13px; color: rgba(245,242,236,0.32);
+    text-align: center; margin-top: 20px; line-height: 1.6;
+  }
+  .success-msg {
+    display: none; background: rgba(184,200,50,0.12);
+    border: 1px solid var(--chartreuse); padding: 40px;
+    text-align: center; margin-top: 24px;
+  }
+  .success-msg h3 {
+    font-family: 'Playfair Display', serif; font-size: 24px;
+    font-weight: 400; color: var(--cream); margin-bottom: 10px;
+  }
+  .success-msg p { font-size: 15px; color: rgba(245,242,236,0.65); line-height: 1.65; }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 48px; background: var(--cream-dark);
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; color: var(--ink-muted); flex-wrap: wrap; gap: 12px;
+  }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--ink); }
+  .footer-odg {
+    color: var(--navy); font-weight: 500; text-decoration: none;
+    border-bottom: 1px solid var(--navy-soft); padding-bottom: 1px;
+  }
+  .footer-odg:hover { color: var(--pink); border-color: var(--pink); }
+
+
+  /* APPLY BLOCK */
+  .apply-block {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 0;
+  }
+  .apply-what-to-expect {
+    background: rgba(245,242,236,0.06);
+    border: 1px solid rgba(245,242,236,0.12);
+    padding: 28px 32px; margin-bottom: 32px; width: 100%;
+  }
+  .apply-expect-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--chartreuse); margin-bottom: 16px;
+  }
+  .apply-expect-list { list-style: none; }
+  .apply-expect-list li {
+    font-size: 15px; font-weight: 300; color: rgba(245,242,236,0.78);
+    padding: 12px 0; border-bottom: 1px solid rgba(245,242,236,0.08);
+    display: flex; gap: 14px; align-items: flex-start; line-height: 1.55;
+  }
+  .apply-expect-list li:last-child { border-bottom: none; }
+  .apply-expect-list li::before {
+    content: ""; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--coral); margin-top: 9px; flex-shrink: 0;
+  }
+  .apply-btn {
+    display: inline-block; background: var(--coral); color: var(--cream);
+    font-size: 15px; font-weight: 500; letter-spacing: 0.04em;
+    padding: 18px 48px; text-decoration: none; transition: background 0.2s;
+    margin-bottom: 20px;
+  }
+  .apply-btn:hover { background: var(--pink); }
+  .apply-note {
+    font-size: 13px; font-weight: 300; color: rgba(245,242,236,0.38);
+    line-height: 1.65;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+  .hero-title    { animation: fadeUp 0.6s 0.1s ease both; }
+  .hero-sub      { animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-cta-group{ animation: fadeUp 0.6s 0.3s ease both; }
+  .pull-quote    { animation: fadeUp 0.6s 0.15s ease both; }
+  .hero-details  { animation: fadeUp 0.6s 0.25s ease both; }
+
+  @media (max-width: 900px) {
+    .community-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+
+    nav { padding: 16px 24px; }
+    .nav-odg { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 60px 24px 48px; border-right: none; border-bottom: 1px solid var(--border); }
+    .hero-right { padding: 48px 24px 60px; }
+    .for-you-inner { grid-template-columns: 1fr; gap: 48px; }
+    .weeks-grid { grid-template-columns: 1fr 1fr; }
+    .facilitator-inner { grid-template-columns: 1fr; gap: 48px; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .pricing-choice { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .section, .for-you, .program, .pricing, .registration, .facilitator { padding: 72px 24px; }
+    .accent-strip { padding: 32px 24px; }
+    footer { flex-direction: column; text-align: center; padding: 32px 24px; }
+    .color-banner { height: 5px; }
+  }
+  @media (max-width: 600px) {
+    .weeks-grid { grid-template-columns: 1fr; }
+  }
+</style>
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://untangling.netlify.app/">
+  <meta property="og:title" content="Untangling — A Six-Week Program for Women After Workplace Trauma">
+  <meta property="og:description" content="The story they gave you isn't yours. Six weeks of small-group work to separate what happened from who you are — before you move forward.">
+  <meta property="og:image" content="https://i.imgur.com/3a8l5fs.jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Untangling by Open Delta Group">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://untangling.netlify.app/">
+  <meta name="twitter:title" content="Untangling — A Six-Week Program for Women After Workplace Trauma">
+  <meta name="twitter:description" content="The story they gave you isn't yours. Six weeks of small-group work to separate what happened from who you are — before you move forward.">
+  <meta name="twitter:image" content="https://i.imgur.com/3a8l5fs.jpeg">
+
+  <!-- General SEO -->
+  <meta name="description" content="The story they gave you isn't yours. Untangling is a six-week small-group program for women who have been laid off or pushed out of a harmful workplace — and need to separate what happened from who they are before moving forward.">
+  <meta name="author" content="Mary Ellen Ball, Open Delta Group">
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Untangling</a>
+  <div class="nav-right">
+    <a href="https://www.opendeltagroup.com" target="_blank" rel="noopener" class="nav-odg">Open Delta Group ↗</a>
+    <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=Av0ulB2C7kK4L8G_OGbaZvcn2rUuOwBOqJdlKXuz3WFUM1BBNlI0SjgxWDIzQUxDM0xBUk1USUFSQy4u" target="_blank" rel="noopener" class="nav-cta">Apply now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">A six-week program for women after workplace trauma</p>
+    <h1 class="hero-title">The story<br>they gave you<br><em>isn't yours.</em></h1>
+    <p class="hero-sub">When a bad boss or harmful workplace hands you a narrative about who you are, it can become the truth you carry into everything that comes next. Untangling is the work of separating what happened from who you are — before you move forward.</p>
+    <div class="hero-cta-group">
+      <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=Av0ulB2C7kK4L8G_OGbaZvcn2rUuOwBOqJdlKXuz3WFUM1BBNlI0SjgxWDIzQUxDM0xBUk1USUFSQy4u" target="_blank" rel="noopener" class="btn-primary">Apply for the first cohort</a>
+      <button class="btn-ghost" onclick="document.getElementById('program').scrollIntoView({behavior:'smooth'})">See the six weeks</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <blockquote class="pull-quote">"You don't have to earn your way back to the truth of who you are. It was always there."</blockquote>
+    <div class="hero-details">
+      <div class="hero-detail-item">
+        <span class="detail-label">Format</span>
+        <span class="detail-value">Six weekly sessions, 90 minutes each</span>
+      </div>
+      <div class="hero-detail-item">
+        <span class="detail-label">Cohort size</span>
+        <span class="detail-value">6 to 8 women — intentionally intimate</span>
+      </div>
+      <div class="hero-detail-item">
+        <span class="detail-label">Delivery</span>
+        <span class="detail-value">Virtual — with in-person options for Chicago &amp; North Shore women</span>
+      </div>
+      <div class="hero-detail-item">
+        <span class="detail-label">Pricing</span>
+        <span class="detail-value">Sliding scale — $75 or $200. You pay only after you've been accepted into a cohort.</span>
+      </div>
+      <div class="hero-detail-item">
+        <span class="detail-label">First cohort</span>
+        <span class="detail-value">Forming now — limited spots</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLOR BANNER -->
+<div class="color-banner">
+  <div class="cb1"></div><div class="cb2"></div><div class="cb3"></div><div class="cb4"></div>
+</div>
+
+<!-- FOR YOU -->
+<section class="for-you">
+  <div class="for-you-inner">
+    <div>
+      <p class="section-label">Is this for you?</p>
+      <h2 class="section-title">You might recognize yourself here.</h2>
+      <ul class="recognition-list">
+        <li>You left — or were pushed out of — a job that was making you smaller.</li>
+        <li>You keep replaying certain moments, certain things that were said to you.</li>
+        <li>You've started to wonder, quietly, if they were right about you.</li>
+        <li>You're sharp and capable, and people in your life tell you that — and you still can't quite believe it right now.</li>
+        <li>You know something was wrong about what happened. You just can't fully trust your own read of it anymore.</li>
+        <li>You're ready to do real work — not venting, not networking, not being told to believe in yourself. The actual work of untangling.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="not-box">
+        <p class="not-box-label">What this is not</p>
+        <ul class="not-list">
+          <li>Therapy or clinical mental health support</li>
+          <li>Career coaching or job search help</li>
+          <li>A networking group or community forum</li>
+          <li>A space where you'll be told to look on the bright side</li>
+          <li>A place where you'll need to justify what happened to be believed</li>
+        </ul>
+      </div>
+      <div class="readiness-quote">
+        <p>"This program works best for women who are ready to examine the story — not just survive it."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section class="program" id="program">
+  <div class="program-inner">
+    <p class="section-label">The six weeks</p>
+    <h2 class="section-title">From wreckage to truth to power.</h2>
+    <div class="phase-legend">
+      <div class="pl-item"><div class="pl-dot" style="background:var(--navy)"></div>Phase 1: name it</div>
+      <div class="pl-item"><div class="pl-dot" style="background:var(--pink)"></div>Phase 2: examine it</div>
+      <div class="pl-item"><div class="pl-dot" style="background:var(--coral)"></div>Phase 3: reclaim it</div>
+    </div>
+    <div class="weeks-grid">
+      <div class="week-tile">
+        <div class="phase-bar ph1"></div>
+        <p class="week-num">Week 1</p>
+        <h3 class="week-name">The wreckage</h3>
+        <p class="week-desc">Full witness to what happened. No reframing. No silver linings. Just telling the story — out loud, without apology — and being believed.</p>
+      </div>
+      <div class="week-tile">
+        <div class="phase-bar ph1"></div>
+        <p class="week-num">Week 2</p>
+        <h3 class="week-name">Gaslighting 101</h3>
+        <p class="week-desc">Name the mechanism. Understanding how gaslighting works — neurologically, psychologically — begins to separate what happened from who you are.</p>
+      </div>
+      <div class="week-tile">
+        <div class="phase-bar ph2"></div>
+        <p class="week-num">Week 3</p>
+        <h3 class="week-name">The stories we inherited</h3>
+        <p class="week-desc">Where did this lie land so easily? We trace the older stories that made fertile ground — not as blame, but as archaeology.</p>
+      </div>
+      <div class="week-tile">
+        <div class="phase-bar ph2"></div>
+        <p class="week-num">Week 4</p>
+        <h3 class="week-name">Separating self from story</h3>
+        <p class="week-desc">The pivot. Using ACT-based defusion and narrative coaching, we practice holding the story at arm's length. You are not what happened to you.</p>
+      </div>
+      <div class="week-tile">
+        <div class="phase-bar ph3"></div>
+        <p class="week-num">Week 5</p>
+        <h3 class="week-name">Evidence of you</h3>
+        <p class="week-desc">We build the counter-narrative from actual evidence — your contributions, your impact, your character. Receipts the old story cannot argue with.</p>
+      </div>
+      <div class="week-tile">
+        <div class="phase-bar ph3"></div>
+        <p class="week-num">Week 6</p>
+        <h3 class="week-name">Power forward</h3>
+        <p class="week-desc">Write the new story from a place of truth, not performance. Wiser, boundaried, and ready for what comes next.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONFIDENTIALITY + COMMUNITY -->
+<section style="padding: 88px 48px; background: var(--cream);">
+  <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start;">
+    <div>
+      <p class="section-label">How this works</p>
+      <h2 class="section-title">A container you can actually trust.</h2>
+      <p style="font-size:16px; font-weight:300; color:var(--ink-soft); line-height:1.85; margin-bottom:20px;">Untangling is a small, closed group. What is shared inside the room stays inside the room — full stop. Every participant agrees to complete confidentiality before the first session begins.</p>
+      <p style="font-size:16px; font-weight:300; color:var(--ink-soft); line-height:1.85; margin-bottom:20px;">This is a judgment-free space. There is no right way to have experienced what you experienced, no correct way to feel about it, and no performance expected of you here. You come as you are.</p>
+      <p style="font-size:16px; font-weight:300; color:var(--ink-soft); line-height:1.85;">You do not pay anything until you have been accepted and assigned to a cohort. The application is free. The commitment — financial and otherwise — comes only after we both know this is the right fit.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div style="background:var(--navy); padding:32px 36px; border-left:4px solid var(--chartreuse);">
+        <p style="font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--chartreuse); margin-bottom:16px;">What happens in the room</p>
+        <ul style="list-style:none; padding:0; margin:0;">
+          <li style="font-size:14px; font-weight:300; color:rgba(245,242,236,0.82); padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; gap:12px; line-height:1.55;"><span style="color:var(--chartreuse); flex-shrink:0;">&#10003;</span>Stays in the room. Always.</li>
+          <li style="font-size:14px; font-weight:300; color:rgba(245,242,236,0.82); padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; gap:12px; line-height:1.55;"><span style="color:var(--chartreuse); flex-shrink:0;">&#10003;</span>Is received without judgment or advice.</li>
+          <li style="font-size:14px; font-weight:300; color:rgba(245,242,236,0.82); padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; gap:12px; line-height:1.55;"><span style="color:var(--chartreuse); flex-shrink:0;">&#10003;</span>Is believed. No one will question your read of what happened.</li>
+          <li style="font-size:14px; font-weight:300; color:rgba(245,242,236,0.82); padding:11px 0; display:flex; gap:12px; line-height:1.55;"><span style="color:var(--chartreuse); flex-shrink:0;">&#10003;</span>Is held by a group of women who have been there too.</li>
+        </ul>
+      </div>
+      <div style="background:var(--coral-pale); padding:28px 32px; border-left:4px solid var(--coral);">
+        <p style="font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--coral); margin-bottom:12px;">Format options</p>
+        <p style="font-size:14px; font-weight:300; color:var(--ink-soft); line-height:1.7; margin-bottom:10px;"><strong style="font-weight:500; color:var(--ink);">Virtual</strong> &nbsp;— open to women anywhere. Weekly Zoom sessions, 90 minutes.</p>
+        <p style="font-size:14px; font-weight:300; color:var(--ink-soft); line-height:1.7;"><strong style="font-weight:500; color:var(--ink);">In-person</strong> &nbsp;— for women in Chicago and the North Shore. Small local cohorts meeting in person when interest allows.</p>
+      </div>
+      <div style="background:var(--pink-pale); padding:28px 32px; border-left:4px solid var(--pink);">
+        <p style="font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--pink); margin-bottom:12px;">Payment</p>
+        <p style="font-size:14px; font-weight:300; color:var(--ink-soft); line-height:1.7;">You apply first. You pay only after you have been accepted and placed into a cohort. No charge for applying, no charge before you know you have a spot.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHARTREUSE ACCENT STRIP -->
+<div class="accent-strip">
+  <p>"The story they handed you was never the whole truth. You're here to find yours."</p>
+</div>
+
+<!-- FACILITATOR -->
+<section class="facilitator">
+  <div class="facilitator-inner">
+    <div class="facilitator-text">
+      <p class="section-label">Your facilitator</p>
+      <h2 class="section-title">Mary Ellen Ball</h2>
+      <p class="facilitator-bio">Mary Ellen is a senior leadership development practitioner, ICF PCC credentialed coach, and founder of Open Delta Group — a fractional people operations practice for growing companies. She has spent 15 years at the intersection of organizational diagnostics, executive coaching, and human development.</p>
+      <p class="facilitator-bio">She built this program because she kept seeing the same thing: women leaving harmful workplaces carrying a story someone else wrote about them, and trying to build their next chapter on that unstable ground.</p>
+      <p class="facilitator-bio">And because six weeks ago, she sat in that same place herself.</p>
+      <ul class="cred-list">
+        <li>ICF PCC credentialed coach</li>
+        <li>Prosci certified change practitioner</li>
+        <li>Former nonprofit CEO</li>
+        <li>15+ years in leadership development and organizational diagnostics</li>
+        <li>MPP, University of Chicago Harris School</li>
+      </ul>
+      <a href="https://www.opendeltagroup.com" target="_blank" rel="noopener" class="odg-link">
+        Visit Open Delta Group ↗
+      </a>
+    </div>
+    <div class="facilitator-quote-block">
+      <p class="fq-text">"The most important thing I can offer in that room isn't a framework or a tool. It's the absolute certainty that I believe you — and the skill to help you find your way back to believing yourself."</p>
+      <p class="fq-name">Mary Ellen Ball, Founder — Open Delta Group &nbsp;·&nbsp; ICF PCC</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="pricing-inner">
+    <p class="section-label">Investment</p>
+    <h2 class="section-title">Sliding scale, no questions asked.</h2>
+    <p class="pricing-sub">You apply first — no charge. Once you've been accepted and assigned to a cohort, you choose the rate that reflects where you are right now. Both are equally welcome here, and no one in the room will know which you chose.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <p class="price-tier">Supported rate</p>
+        <p class="price-amount">$75</p>
+        <p class="price-desc">For women navigating financial stress right now. No explanation needed. No gatekeeping. Just choose it.</p>
+        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=Av0ulB2C7kK4L8G_OGbaZvcn2rUuOwBOqJdlKXuz3WFUM1BBNlI0SjgxWDIzQUxDM0xBUk1USUFSQy4u" target="_blank" rel="noopener" class="btn-navy-solid">Apply at this rate</a>
+      </div>
+      <div class="price-card featured">
+        <p class="price-tier">Standard rate</p>
+        <p class="price-amount">$200</p>
+        <p class="price-desc">For women who are able to contribute more to the program. Choosing this helps sustain the supported rate for others.</p>
+        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=Av0ulB2C7kK4L8G_OGbaZvcn2rUuOwBOqJdlKXuz3WFUM1BBNlI0SjgxWDIzQUxDM0xBUk1USUFSQy4u" target="_blank" rel="noopener" class="btn-navy-solid">Apply at this rate</a>
+      </div>
+    </div>
+    <p class="price-note">This is the founding cohort rate. Future cohorts will be priced higher as the program develops. Joining now means you're in from the beginning — and your feedback directly shapes what this becomes.</p>
+  </div>
+</section>
+
+<!-- REGISTRATION -->
+<section class="registration" id="register">
+  <div class="registration-inner">
+    <p class="section-label">Apply</p>
+    <h2 class="section-title">Tell me a little about where you are.</h2>
+    <p class="reg-sub">This isn't an application you can get wrong. There are no right answers. I'm reading these to understand where you are and make sure this program is the right fit — not to evaluate you.</p>
+
+    <div class="apply-block">
+      <div class="apply-what-to-expect">
+        <p class="apply-expect-label">What you'll be asked</p>
+        <ul class="apply-expect-list">
+          <li>A little about what happened and how long ago</li>
+          <li>What you're hoping to get from this program</li>
+          <li>One word for how you're carrying it right now</li>
+          <li>Your rate — $75 supported or $200 standard, no questions asked</li>
+        </ul>
+      </div>
+      <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=Av0ulB2C7kK4L8G_OGbaZvcn2rUuOwBOqJdlKXuz3WFUM1BBNlI0SjgxWDIzQUxDM0xBUk1USUFSQy4u" target="_blank" rel="noopener" class="apply-btn">
+        Open the application form
+      </a>
+      <p class="apply-note">Opens in Microsoft Forms &nbsp;·&nbsp; Takes about 5 minutes &nbsp;·&nbsp; No payment required to apply &nbsp;·&nbsp; I read every application personally and will be in touch within 48 hours.</p>
+      <p class="apply-note" style="margin-top:10px;">Questions before applying? Email me at <a href="mailto:maryellen@opendeltagroup.com" style="color:var(--chartreuse); text-underline-offset:3px;">maryellen@opendeltagroup.com</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">Untangling</span>
+  <span>A program by <a href="https://www.opendeltagroup.com" target="_blank" rel="noopener" class="footer-odg">Open Delta Group</a> &nbsp;·&nbsp; Mary Ellen Ball &nbsp;·&nbsp; maryellen@opendeltagroup.com</span>
+  <span><a href="https://www.opendeltagroup.com" target="_blank" rel="noopener" class="footer-odg">opendeltagroup.com</a></span>
+</footer>
+
+
+</body>
+</html>
